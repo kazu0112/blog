@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>記事一覧 | 学習ブログ</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
+    <header th:replace="~{fragments :: siteHeader}"></header>
     <main>
         <h2>記事一覧</h2>
-		
-		<p><a th:href="@{/articles/new}">新規投稿</a></p>
+        <p><a th:href="@{/articles/new}">新規投稿</a></p>
 
         <p th:if="${#lists.isEmpty(articles)}">まだ記事がありません。</p>
 
@@ -23,5 +24,6 @@
             </p>
         </article>
     </main>
+    <footer th:replace="~{fragments :: siteFooter}"></footer>
 </body>
 </html>

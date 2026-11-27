@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>記事の編集 | 学習ブログ</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
+    <header th:replace="~{fragments :: siteHeader}"></header>
     <main>
         <h2>記事の編集</h2>
 
@@ -23,5 +25,6 @@
 
         <p><a th:href="@{/articles}">一覧に戻る</a></p>
     </main>
+    <footer th:replace="~{fragments :: siteFooter}"></footer>
 </body>
 </html>

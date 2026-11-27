@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>ログイン | 学習ブログ</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
+    <header th:replace="~{fragments :: siteHeader}"></header>
     <main>
         <h2>ログイン</h2>
 
@@ -20,5 +22,6 @@
             <button type="submit">ログインする</button>
         </form>
     </main>
+    <footer th:replace="~{fragments :: siteFooter}"></footer>
 </body>
 </html>

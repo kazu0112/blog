@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${article.title} + ' | 学習ブログ'">記事詳細 | 学習ブログ</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
+    <header th:replace="~{fragments :: siteHeader}"></header>
     <main>
         <article>
             <h2 th:text="${article.title}">記事タイトル</h2>
@@ -16,15 +18,16 @@
             <p class="article-body" th:text="${article.body}">本文</p>
         </article>
 
+        <p>
+            <a th:href="@{/articles/{id}/edit(id=${article.id})}">編集する</a>
+        </p>
+        <form th:action="@{/articles/{id}/delete(id=${article.id})}" method="post"
+            onsubmit="return confirm('この記事を削除します。よろしいですか。')">
+            <button type="submit">削除する</button>
+        </form>
+
         <p><a th:href="@{/articles}">一覧に戻る</a></p>
-		
-		<p>
-		    <a th:href="@{/articles/{id}/edit(id=${article.id})}">編集する</a>
-		</p>
-		<form th:action="@{/articles/{id}/delete(id=${article.id})}" method="post"
-		    onsubmit="return confirm('この記事を削除します。よろしいですか。')">
-		    <button type="submit">削除する</button>
-		</form>
     </main>
+    <footer th:replace="~{fragments :: siteFooter}"></footer>
 </body>
 </html>
