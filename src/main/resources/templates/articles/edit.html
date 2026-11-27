@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>記事の編集 | 学習ブログ</title>
+</head>
+<body>
+    <main>
+        <h2>記事の編集</h2>
+
+        <form th:action="@{/articles/{id}/update(id=${articleId})}" th:object="${articleForm}"
+            method="post">
+            <p>
+                <label>タイトル<br><input type="text" th:field="*{title}" size="50"></label><br>
+                <span class="error" th:errors="*{title}"></span>
+            </p>
+            <p>
+                <label>本文<br><textarea th:field="*{body}" rows="10" cols="60"></textarea></label><br>
+                <span class="error" th:errors="*{body}"></span>
+            </p>
+            <button type="submit">更新する</button>
+        </form>
+
+        <p><a th:href="@{/articles}">一覧に戻る</a></p>
+    </main>
+</body>
+</html>
