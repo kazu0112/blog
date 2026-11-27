@@ -17,6 +17,14 @@
         </article>
 
         <p><a th:href="@{/articles}">一覧に戻る</a></p>
+		
+		<p>
+		    <a th:href="@{/articles/{id}/edit(id=${article.id})}">編集する</a>
+		</p>
+		<form th:action="@{/articles/{id}/delete(id=${article.id})}" method="post"
+		    onsubmit="return confirm('この記事を削除します。よろしいですか。')">
+		    <button type="submit">削除する</button>
+		</form>
     </main>
 </body>
 </html>
