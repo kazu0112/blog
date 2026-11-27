@@ -1,5 +1,6 @@
 package com.example.blog;
 
+import java.security.Principal;
 import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
 
 @Controller
 public class ArticleController {
@@ -48,7 +50,7 @@ public class ArticleController {
 
     @PostMapping("/articles")
     public String create(@Validated @ModelAttribute ArticleForm articleForm,
-            BindingResult bindingResult) {
+            BindingResult bindingResult, Principal principal) {
         if (bindingResult.hasErrors()) {
             return "articles/new";
         }
@@ -102,4 +104,5 @@ public class ArticleController {
         articleRepository.deleteById(id);
         return "redirect:/articles";
     }
+    
 }
