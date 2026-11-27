@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>記事一覧 | 学習ブログ</title>
+</head>
+<body>
+    <main>
+        <h2>記事一覧</h2>
+
+        <p th:if="${#lists.isEmpty(articles)}">まだ記事がありません。</p>
+
+        <article th:each="article : ${articles}" class="article-card">
+            <h3>
+                <a th:href="@{/articles/{id}(id=${article.id})}" th:text="${article.title}">記事タイトル</a>
+            </h3>
+            <p th:text="${article.excerpt}">本文の抜粋</p>
+            <p class="article-meta">
+                <span th:text="${article.author.displayName}">投稿者</span>・
+                <span th:text="${#temporals.format(article.createdAt, 'yyyy/MM/dd HH:mm')}">2026/07/01 10:00</span>
+            </p>
+        </article>
+    </main>
+</body>
+</html>
