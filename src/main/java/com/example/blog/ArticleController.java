@@ -65,4 +65,41 @@ public class ArticleController {
 
         return "redirect:/articles";
     }
+    
+    @GetMapping("/articles/{id}/edit")
+    public String editForm(@PathVariable Integer id, Model model) {
+        Article article = articleRepository.findById(id).orElseThrow();
+
+        ArticleForm articleForm = new ArticleForm();
+        articleForm.setTitle(article.getTitle());
+        articleForm.setBody(article.getBody());
+
+        model.addAttribute("articleForm", articleForm);
+        model.addAttribute("articleId", id);
+        return "articles/edit";
+    }
+
+    @PostMapping("/articles/{id}/update")
+    public String update(@PathVariable Integer id,
+            @Validated @ModelAttribute ArticleForm articleForm,
+            BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("articleId", id);
+            return "articles/edit";
+        }
+
+        Article article = articleRepository.findById(id).orElseThrow();
+        article.setTitle(articleForm.getTitle());
+        article.setBody(articleForm.getBody());
+        article.setUpdatedAt(LocalDateTime.now());
+        articleRepository.save(article);
+
+        return "redirect:/articles/" + id;
+    }
+
+    @PostMapping("/articles/{id}/delete")
+    public String delete(@PathVariable Integer id) {
+        articleRepository.deleteById(id);
+        return "redirect:/articles";
+    }
 }
